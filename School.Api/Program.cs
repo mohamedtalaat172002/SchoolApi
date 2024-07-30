@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using School.infrastructure.Context;
+
 namespace School.Api
 {
     public class Program
@@ -10,9 +13,12 @@ namespace School.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer
+            (builder.Configuration.GetConnectionString("ConnectionStrings")));
+
 
             var app = builder.Build();
 
@@ -34,3 +40,6 @@ namespace School.Api
         }
     }
 }
+
+
+
