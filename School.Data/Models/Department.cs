@@ -2,7 +2,7 @@
 
 namespace School.Data.Models
 {
-    public partial class Department
+    public class Department
     {
         public Department()
         {

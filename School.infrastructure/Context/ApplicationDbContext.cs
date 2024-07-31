@@ -5,7 +5,7 @@ namespace School.infrastructure.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions dbContext) : base(dbContext)
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
 
         }

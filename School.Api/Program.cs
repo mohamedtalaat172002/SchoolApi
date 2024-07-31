@@ -1,7 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
+using School.Core;
+using School.Core.Middleware;
+using School.infrastructure;
 using School.infrastructure.Context;
-
+using School.Service;
 namespace School.Api
 {
     public class Program
@@ -16,8 +19,15 @@ namespace School.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+
             builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer
-            (builder.Configuration.GetConnectionString("ConnectionStrings")));
+            (builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddCoreDependencies()
+                            .AddInfrastrucureDependencies()
+                            .AddServiceDependencies();
+
 
 
             var app = builder.Build();
@@ -28,7 +38,7 @@ namespace School.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

@@ -12,8 +12,8 @@ using School.infrastructure.Context;
 namespace School.infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240730230224_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20240731082759_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
