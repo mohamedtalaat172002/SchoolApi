@@ -16,6 +16,15 @@
                 Message = "Deleted Successfully"
             };
         }
+        public Response<T> Updated<T>()
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Succeeded = true,
+                Message = "Updated Successfully"
+            };
+        }
         public Response<T> Success<T>(T entity, object Meta = null)
         {
             return new Response<T>()
@@ -54,8 +63,6 @@
                 Message = Message == null ? "can't Process The entity " : Message
             };
         }
-
-
 
         public Response<T> NotFound<T>(string message = null)
         {

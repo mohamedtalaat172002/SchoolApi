@@ -38,7 +38,7 @@ namespace School.Core.Feature.Students.Queries.Handler
 
         public async Task<Response<GetSingleStudentDto>> Handle(GetSingleStudentByIdQuery request, CancellationToken cancellationToken)
         {
-            var Std = await _studentService.GetStudentById(request.id);
+            var Std = await _studentService.GetStudentByIdIncludeDept(request.id);
             if (Std == null)
                 return NotFound<GetSingleStudentDto>($"No student with id:{request.id}");
 

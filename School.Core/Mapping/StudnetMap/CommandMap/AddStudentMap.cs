@@ -7,7 +7,7 @@ namespace School.Core.Mapping.StudnetMap
     {
         void AddStudentMap()
         {
-            CreateMap<EditeStudentCommand, Student>();
+            CreateMap<AddStudentCommand, Student>();
         }
     }
 }

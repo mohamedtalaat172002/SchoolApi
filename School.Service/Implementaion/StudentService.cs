@@ -20,13 +20,24 @@ namespace School.Service.Implementaion
             return "Succefully Added";
         }
 
-        public async Task<string> DeleteStudent(int id)
+        public async Task<string> DeleteStudent(Student student)
 
         {
-            var std = await _studentInfrastructure.GetByIdAsync(id);
-            await _studentInfrastructure.DeleteAsync(std);
-            return "Deleted Succefully";
+            var transaction = _studentInfrastructure.BeginTransaction();
+            try
+            {
+                await _studentInfrastructure.DeleteAsync(student);
+                await transaction.CommitAsync();
+                return "Deleted Succefully";
+
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                return "Delete process Failed ";
+            }
         }
+
 
         public async Task<IQueryable<Student>> GetAllStudents()
         {
@@ -34,7 +45,7 @@ namespace School.Service.Implementaion
                 .Include(s => s.Department);
         }
 
-        public async Task<Student> GetStudentById(int id)
+        public async Task<Student> GetStudentByIdIncludeDept(int id)
         {
             return await _studentInfrastructure.GetTableNoTracking()
                 .Where(s => s.StudID == id)
@@ -64,7 +75,9 @@ namespace School.Service.Implementaion
             return true;
         }
 
-
-
+        public async Task<Student> GetStudentByIdWithOutDept(int id)
+        {
+            return await _studentInfrastructure.GetByIdAsync(id);
+        }
     }
 }

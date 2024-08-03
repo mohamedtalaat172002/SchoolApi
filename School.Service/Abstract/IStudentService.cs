@@ -5,9 +5,10 @@ namespace School.Service.Abstract
     public interface IStudentService
     {
         Task<IQueryable<Student>> GetAllStudents();
-        Task<Student> GetStudentById(int id);
+        Task<Student> GetStudentByIdIncludeDept(int id);
+        Task<Student> GetStudentByIdWithOutDept(int id);
         Task<String> AddStudent(Student student);
-        Task<String> DeleteStudent(int id);
+        Task<String> DeleteStudent(Student student);
         Task<String> UpdateStudent(Student student);
 
         public Task<bool> IsNameExist(string nameEn);

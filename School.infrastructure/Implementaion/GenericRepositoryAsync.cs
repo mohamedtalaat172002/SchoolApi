@@ -84,8 +84,6 @@ namespace School.infrastructure.Implementaion
 
         public IDbContextTransaction BeginTransaction()
         {
-
-
             return _dbContext.Database.BeginTransaction();
         }
 

@@ -13,33 +13,39 @@ namespace School.Core.Feature.Students.Commands.Handler
         , IRequestHandler<DeleteStudentCommand, Response<String>>
     {
         private readonly IStudentService _studentService;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
         public StudentcommandHandler(IStudentService studentService, IMapper mapper)
         {
             _studentService = studentService;
-            this.mapper = mapper;
+            this._mapper = mapper;
         }
 
         public async Task<Response<string>> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {
-            var std = mapper.Map<Student>(request);
+            var std = _mapper.Map<Student>(request);
             string res = await _studentService.AddStudent(std);
             return Created(res);
         }
 
         public async Task<Response<string>> Handle(EditeStudentCommand request, CancellationToken cancellationToken)
         {
-            var std = mapper.Map<Student>(request);
-            string res = await _studentService.UpdateStudent(std);
-            return Created(res);
+            //check the existence
+            var std = _studentService.GetStudentByIdWithOutDept(request.StudID);
+            if (std == null) return NotFound<String>($"No student with id:{request.StudID}");
+            //maping
+            var StdMapped = _mapper.Map<Student>(request);
+            //call servcice
+            var res = await _studentService.UpdateStudent(StdMapped);
+            //return response
+            return Updated<String>();
         }
 
         public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
         {
-            var Std = _studentService.GetStudentById(request.id);
+            var Std = await _studentService.GetStudentByIdWithOutDept(request.id);
             if (Std == null)
                 return NotFound<String>($"No student with id:{request.id}");
-            await _studentService.DeleteStudent(request.id);
+            await _studentService.DeleteStudent(Std);
             return Deleted<String>();
 
         }
