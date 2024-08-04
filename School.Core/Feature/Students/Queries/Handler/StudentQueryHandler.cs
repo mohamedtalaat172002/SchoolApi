@@ -3,13 +3,18 @@ using MediatR;
 using School.Core.Base;
 using School.Core.Feature.Students.Queries.Model;
 using School.Core.Feature.Students.Queries.Result;
+using School.Core.Wrapper;
+using School.Data.Models;
 using School.Service.Abstract;
+using System.Linq.Expressions;
 
 namespace School.Core.Feature.Students.Queries.Handler
 {
     public class StudentQueryHandler : ResponseHandler,
         IRequestHandler<GetAllStudentQuery, Response<IQueryable<GetAllStudentsDto>>>,
-        IRequestHandler<GetSingleStudentByIdQuery, Response<GetSingleStudentDto>>
+        IRequestHandler<GetSingleStudentByIdQuery, Response<GetSingleStudentDto>>,
+        IRequestHandler<GetStudentsPaginatedQuery, PaginatedResult<GetStudentsPaginatedResponse>>
+
     {
 
         private readonly IMapper _mapper;
@@ -29,6 +34,7 @@ namespace School.Core.Feature.Students.Queries.Handler
             //map to dto
             var stdsMap = _mapper.Map<IEnumerable<GetAllStudentsDto>>(stds).AsQueryable();
             // return dto 
+
             return Success(stdsMap);
 
 
@@ -44,6 +50,15 @@ namespace School.Core.Feature.Students.Queries.Handler
 
             var stdMapped = _mapper.Map<GetSingleStudentDto>(Std);
             return Success(stdMapped);
+        }
+
+        public async Task<PaginatedResult<GetStudentsPaginatedResponse>> Handle(GetStudentsPaginatedQuery request, CancellationToken cancellationToken)
+        {
+            Expression<Func<Student, GetStudentsPaginatedResponse>> exp = e =>
+            new(e.StudID, e.Name, e.Address, e.Department.DName);
+            var stds = await _studentService.GetAllStudents();
+            var stdPaginated = await stds.Select(exp).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+            return (stdPaginated);
         }
 
 

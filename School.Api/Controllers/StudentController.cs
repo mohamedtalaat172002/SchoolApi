@@ -46,6 +46,12 @@ namespace School.Api.Controllers
             return NewResult(res);
         }
 
+        [HttpGet(Router.StudentRouting.Paginated)]
+        public async Task<IActionResult> GetStudentPaginated([FromQuery] GetStudentsPaginatedQuery query)
+        {
+            var res = await _mediator.Send(query);
+            return Ok(res);
+        }
 
 
 
