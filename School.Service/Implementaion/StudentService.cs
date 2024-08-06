@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using School.Data.Helper;
 using School.Data.Models;
 using School.infrastructure.Abstract;
 using School.Service.Abstract;
@@ -78,6 +79,35 @@ namespace School.Service.Implementaion
         public async Task<Student> GetStudentByIdWithOutDept(int id)
         {
             return await _studentInfrastructure.GetByIdAsync(id);
+        }
+
+        public IQueryable<Student> GetStudentsWithFilterAndSearch(StudentOrderEnum stdsOrderEnum, string Search)
+        {
+            var Stds = _studentInfrastructure.GetTableNoTracking().Include(s => s.Department).AsQueryable();
+            if (Search != null)
+            {
+                Stds = Stds.Where(s => s.Name.Contains(Search) || s.Address.Contains(Search));
+            }
+
+            switch (stdsOrderEnum)
+            {
+                case StudentOrderEnum.StudID:
+                    Stds = Stds.OrderBy(s => s.StudID);
+                    break;
+                case StudentOrderEnum.Name:
+                    Stds = Stds.OrderBy(s => s.Name);
+                    break;
+                case StudentOrderEnum.Address:
+                    Stds = Stds.OrderBy(s => s.Address);
+                    break;
+                case StudentOrderEnum.DepartmentName:
+                    Stds = Stds.OrderBy(s => s.Department.DName);
+                    break;
+                default: return Stds;
+
+            }
+
+            return Stds;
         }
     }
 }

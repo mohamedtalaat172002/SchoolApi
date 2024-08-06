@@ -56,9 +56,10 @@ namespace School.Core.Feature.Students.Queries.Handler
         {
             Expression<Func<Student, GetStudentsPaginatedResponse>> exp = e =>
             new(e.StudID, e.Name, e.Address, e.Department.DName);
-            var stds = await _studentService.GetAllStudents();
+
+            var stds = _studentService.GetStudentsWithFilterAndSearch(request.OrderBy, request.Search);
             var stdPaginated = await stds.Select(exp).ToPaginatedListAsync(request.PageNumber, request.PageSize);
-            return (stdPaginated);
+            return stdPaginated;
         }
 
 

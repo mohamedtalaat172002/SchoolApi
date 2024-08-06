@@ -1,4 +1,5 @@
-﻿using School.Data.Models;
+﻿using School.Data.Helper;
+using School.Data.Models;
 
 namespace School.Service.Abstract
 {
@@ -10,8 +11,9 @@ namespace School.Service.Abstract
         Task<String> AddStudent(Student student);
         Task<String> DeleteStudent(Student student);
         Task<String> UpdateStudent(Student student);
-
         public Task<bool> IsNameExist(string nameEn);
         public Task<bool> IsNameExistExcludeSelf(string nameAr, int id);
+
+        public IQueryable<Student> GetStudentsWithFilterAndSearch(StudentOrderEnum studentOrderEnum, String Search);
     }
 }
