@@ -11,8 +11,10 @@ namespace School.Service.Abstract
         Task<String> AddStudent(Student student);
         Task<String> DeleteStudent(Student student);
         Task<String> UpdateStudent(Student student);
-        public Task<bool> IsNameExist(string nameEn);
-        public Task<bool> IsNameExistExcludeSelf(string nameAr, int id);
+        public Task<bool> IsNameEnExist(string nameEn);
+        public Task<bool> IsNameArExist(string nameAr);
+        public Task<bool> IsNameArExistExcludeSelf(string nameAr, int id);
+        public Task<bool> IsNameEnExistExcludeSelf(string nameEn, int id);
 
         public IQueryable<Student> GetStudentsWithFilterAndSearch(StudentOrderEnum studentOrderEnum, String Search);
     }

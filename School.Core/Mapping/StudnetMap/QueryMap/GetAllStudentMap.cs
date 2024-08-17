@@ -8,7 +8,8 @@ namespace School.Core.Mapping.StudnetMap
         void GetAllStudentMap()
         {
             CreateMap<Student, GetAllStudentsDto>()
-                .ForMember(d => d.DeptName, s => s.MapFrom(sr => sr.Department.DName));
+                .ForMember(s => s.Name, sr => sr.MapFrom(src => src.Localize(src.NameAr, src.NameEn)))
+                .ForMember(d => d.DeptName, s => s.MapFrom(sr => sr.Localize(sr.Department.DNameAr, sr.Department.DNameEn)));
         }
     }
 }

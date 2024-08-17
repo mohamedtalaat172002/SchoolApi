@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using School.Core.Base;
 using School.Core.Feature.Students.Queries.Model;
 using School.Core.Feature.Students.Queries.Result;
+using School.Core.Resources;
 using School.Core.Wrapper;
 using School.Data.Models;
 using School.Service.Abstract;
@@ -19,12 +21,16 @@ namespace School.Core.Feature.Students.Queries.Handler
 
         private readonly IMapper _mapper;
         private readonly IStudentService _studentService;
+        private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 
-        public StudentQueryHandler(IMapper mapper, IStudentService studentService)
+        public StudentQueryHandler(IMapper mapper,
+            IStudentService studentService,
+            IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
         {
 
             _mapper = mapper;
             _studentService = studentService;
+            _stringLocalizer = stringLocalizer;
         }
 
         public async Task<Response<IQueryable<GetAllStudentsDto>>> Handle(GetAllStudentQuery request, CancellationToken cancellationToken)
@@ -46,7 +52,7 @@ namespace School.Core.Feature.Students.Queries.Handler
         {
             var Std = await _studentService.GetStudentByIdIncludeDept(request.id);
             if (Std == null)
-                return NotFound<GetSingleStudentDto>($"No student with id:{request.id}");
+                return NotFound<GetSingleStudentDto>();
 
             var stdMapped = _mapper.Map<GetSingleStudentDto>(Std);
             return Success(stdMapped);
@@ -55,7 +61,7 @@ namespace School.Core.Feature.Students.Queries.Handler
         public async Task<PaginatedResult<GetStudentsPaginatedResponse>> Handle(GetStudentsPaginatedQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<Student, GetStudentsPaginatedResponse>> exp = e =>
-            new(e.StudID, e.Name, e.Address, e.Department.DName);
+            new(e.StudID, e.NameEn, e.Address, e.Department.DNameEn);
 
             var stds = _studentService.GetStudentsWithFilterAndSearch(request.OrderBy, request.Search);
             var stdPaginated = await stds.Select(exp).ToPaginatedListAsync(request.PageNumber, request.PageSize);

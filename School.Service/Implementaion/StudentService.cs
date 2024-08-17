@@ -61,20 +61,38 @@ namespace School.Service.Implementaion
             return "Updated succefully ";
         }
 
-        public async Task<bool> IsNameExist(string nameAr)
+        public async Task<bool> IsNameEnExist(string nameEn)
         {
-            var student = _studentInfrastructure.GetTableNoTracking().Where(x => x.Name.Equals(nameAr)).FirstOrDefault();
+            var student = _studentInfrastructure.GetTableNoTracking().Where(x => x.NameEn.Equals(nameEn)).FirstOrDefault();
+            if (student == null) return false;
+            return true;
+        }
+        public async Task<bool> IsNameArExist(string nameAr)
+        {
+            var student = _studentInfrastructure.GetTableNoTracking().Where(x => x.NameAr.Equals(nameAr)).FirstOrDefault();
             if (student == null) return false;
             return true;
         }
 
-        public async Task<bool> IsNameExistExcludeSelf(string nameAr, int id)
+
+
+        public async Task<bool> IsNameEnExistExcludeSelf(string nameEn, int id)
         {
 
-            var student = await _studentInfrastructure.GetTableNoTracking().Where(x => x.Name.Equals(nameAr) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
+            var student = await _studentInfrastructure.GetTableNoTracking().Where(x => x.NameEn.Equals(nameEn) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
             if (student == null) return false;
             return true;
         }
+
+        public async Task<bool> IsNameArExistExcludeSelf(string nameAr, int id)
+        {
+
+            var student = await _studentInfrastructure.GetTableNoTracking().Where(x => x.NameAr.Equals(nameAr) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
+            if (student == null) return false;
+            return true;
+        }
+
+
 
         public async Task<Student> GetStudentByIdWithOutDept(int id)
         {
@@ -86,7 +104,7 @@ namespace School.Service.Implementaion
             var Stds = _studentInfrastructure.GetTableNoTracking().Include(s => s.Department).AsQueryable();
             if (Search != null)
             {
-                Stds = Stds.Where(s => s.Name.Contains(Search) || s.Address.Contains(Search));
+                Stds = Stds.Where(s => s.NameEn.Contains(Search) || s.Address.Contains(Search));
             }
 
             switch (stdsOrderEnum)
@@ -95,13 +113,13 @@ namespace School.Service.Implementaion
                     Stds = Stds.OrderBy(s => s.StudID);
                     break;
                 case StudentOrderEnum.Name:
-                    Stds = Stds.OrderBy(s => s.Name);
+                    Stds = Stds.OrderBy(s => s.NameEn);
                     break;
                 case StudentOrderEnum.Address:
                     Stds = Stds.OrderBy(s => s.Address);
                     break;
                 case StudentOrderEnum.DepartmentName:
-                    Stds = Stds.OrderBy(s => s.Department.DName);
+                    Stds = Stds.OrderBy(s => s.Department.DNameEn);
                     break;
                 default: return Stds;
 

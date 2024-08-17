@@ -1,41 +1,52 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using School.Core.Feature.Students.Commands.Model;
+using School.Core.Resources;
 
 namespace School.Core.Feature.Students.Commands.Validation
 {
     public static class ValidationExtention
     {
-        public static IRuleBuilderOptions<T, TProperty> ApplyNullEmptyRule<T, TProperty>(
-       this IRuleBuilder<T, TProperty> ruleBuilder, string propertyName)
+
+
+        public static IRuleBuilderOptions<T, TProperty> ApplyNullEmptyRule<T, TProperty>
+            (this IRuleBuilder<T, TProperty> ruleBuilder,
+            IStringLocalizer<SharedResources> _localizer)
         {
             return ruleBuilder
                 .NotEmpty()
-                .WithMessage($"{propertyName} cannot be empty")
+                .WithMessage($" {_localizer[SharedResourcesKeys.NotEmpty]}")
                 .NotNull()
-                .WithMessage($"{propertyName} cannot be null");
+                .WithMessage($"{_localizer[SharedResourcesKeys.NotNull]}");
         }
 
-        public static void ApplyValidationRules<T>(this AbstractValidator<T> validator) where T : IStudentCommand
+        public static void ApplyValidationRules<T>(this AbstractValidator<T> validator, IStringLocalizer<SharedResources> _localizer) where T : IStudentCommand
         {
-            validator.RuleFor(student => student.Name)
-                .ApplyNullEmptyRule("Name")
-                .MaximumLength(50)
-                .WithMessage("Maximum length for name is 50");
+            validator.RuleFor(student => student.NameAr)
+                .ApplyNullEmptyRule(_localizer)
+                .MaximumLength(100)
+                 .WithMessage(_localizer[SharedResourcesKeys.MaxLength100]);
+
+            validator.RuleFor(student => student.NameEn)
+                .ApplyNullEmptyRule(_localizer)
+                .MaximumLength(100)
+                 .WithMessage(_localizer[SharedResourcesKeys.MaxLength100]);
+
 
             validator.RuleFor(x => x.Address)
-                .ApplyNullEmptyRule("Address")
+                .ApplyNullEmptyRule(_localizer)
                 .MaximumLength(100)
-                .WithMessage("Address can't be more than 100 char");
+                .WithMessage(_localizer[SharedResourcesKeys.MaxLength100]);
 
             validator.RuleFor(x => x.Phone)
-                .ApplyNullEmptyRule("Phone")
-                .Matches(@"^\d{5}$")
-                .WithMessage("Phone number must be 5 digits long");
+                .ApplyNullEmptyRule(_localizer)
+                .Matches(@"^\d{11}$")
+                .WithMessage(_localizer[SharedResourcesKeys.MaxLengthPhone]);
 
             validator.RuleFor(x => x.DID)
-                .ApplyNullEmptyRule("Department ID")
+                .ApplyNullEmptyRule(_localizer)
                 .InclusiveBetween(1, 3)
-                .WithMessage("The IDs are: 1 for CS, 2 for IT, 3 for IS");
+                .WithMessage(_localizer[SharedResourcesKeys.DepartmentNums]);
         }
 
 

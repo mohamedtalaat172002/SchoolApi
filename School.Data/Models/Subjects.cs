@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using School.Data.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace School.Data.Models
 {
-    public class Subjects
+    public class Subjects : LocalizeEntity
     {
         public Subjects()
         {
@@ -12,7 +13,9 @@ namespace School.Data.Models
         [Key]
         public int SubID { get; set; }
         [StringLength(500)]
-        public string SubjectName { get; set; }
+        public string SubjectNameEn { get; set; }
+        [StringLength(500)]
+        public string SubjectNameAr { get; set; }
         public DateTime Period { get; set; }
         public virtual ICollection<StudentSubject> StudentsSubjects { get; set; }
         public virtual ICollection<DepartmetSubject> DepartmetsSubjects { get; set; }

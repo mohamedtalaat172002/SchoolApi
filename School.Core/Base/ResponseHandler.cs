@@ -1,19 +1,24 @@
-﻿namespace School.Core.Base
+﻿using Microsoft.Extensions.Localization;
+using School.Core.Resources;
+
+namespace School.Core.Base
 {
     public class ResponseHandler
     {
+        private readonly IStringLocalizer<SharedResources> _localization;
 
-        public ResponseHandler()
+        public ResponseHandler(IStringLocalizer<SharedResources> stringLocalizer)
         {
-
+            _localization = stringLocalizer;
         }
+
         public Response<T> Deleted<T>()
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Deleted Successfully"
+                Message = _localization[SharedResourcesKeys.Deleted]
             };
         }
         public Response<T> Updated<T>()
@@ -22,7 +27,7 @@
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Updated Successfully"
+                Message = _localization[SharedResourcesKeys.Updated]
             };
         }
         public Response<T> Success<T>(T entity, object Meta = null)
@@ -32,7 +37,7 @@
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Retrived Successfully",
+                Message = _localization[SharedResourcesKeys.Success],
                 Meta = Meta
             };
         }
@@ -42,7 +47,7 @@
             {
                 StatusCode = System.Net.HttpStatusCode.Unauthorized,
                 Succeeded = true,
-                Message = "UnAuthorized"
+                Message = _localization[SharedResourcesKeys.Unauthorized]
             };
         }
         public Response<T> BadRequest<T>(string Message = null)
@@ -51,7 +56,7 @@
             {
                 StatusCode = System.Net.HttpStatusCode.BadRequest,
                 Succeeded = false,
-                Message = Message == null ? "Bad Request" : Message
+                Message = Message == null ? _localization[SharedResourcesKeys.BadRequest] : Message
             };
         }
         public Response<T> UnprocessableEntity<T>(string Message = null)
@@ -60,20 +65,18 @@
             {
                 StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
                 Succeeded = false,
-                Message = Message == null ? "can't Process The entity " : Message
+                Message = Message == null ? _localization[SharedResourcesKeys.Unprocessable] : Message
             };
         }
-
         public Response<T> NotFound<T>(string message = null)
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.NotFound,
                 Succeeded = false,
-                Message = message == null ? "Not Found" : message
+                Message = message == null ? _localization[SharedResourcesKeys.NotFound] : message
             };
         }
-
         public Response<T> Created<T>(T entity, object Meta = null)
         {
             return new Response<T>()
@@ -81,6 +84,7 @@
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.Created,
                 Succeeded = true,
+                Message = _localization[SharedResourcesKeys.Created],
 
                 Meta = Meta
             };

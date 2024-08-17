@@ -1,10 +1,13 @@
 
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using School.Core;
 using School.Core.Middleware;
 using School.infrastructure;
 using School.infrastructure.Context;
 using School.Service;
+using System.Globalization;
 namespace School.Api
 {
     public class Program
@@ -28,6 +31,30 @@ namespace School.Api
                             .AddInfrastrucureDependencies()
                             .AddServiceDependencies();
 
+            builder.Services.AddControllersWithViews();
+            //Localization Configuration
+            builder.Services.AddLocalization(opt =>
+            {
+                opt.ResourcesPath = "";
+            });
+            //builder.Services.AddControllers()
+            //.AddViewLocalization()
+            //.AddDataAnnotationsLocalization();
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                List<CultureInfo> supportedCultures = new List<CultureInfo>
+                {
+                     new CultureInfo("En-US"),
+                     new CultureInfo("de-DE"),
+                     new CultureInfo("fr-FR"),
+                     new CultureInfo("Ar-EG")
+               };
+
+                options.DefaultRequestCulture = new RequestCulture("En-US");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
 
 
             var app = builder.Build();
@@ -45,6 +72,8 @@ namespace School.Api
 
 
             app.MapControllers();
+            var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.Run();
         }
