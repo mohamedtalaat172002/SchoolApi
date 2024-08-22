@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.infrastructure.Context;
 
@@ -11,9 +12,11 @@ using School.infrastructure.Context;
 namespace School.infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240822180646_AddInstructorAndDataAnnotationUsing")]
+    partial class AddInstructorAndDataAnnotationUsing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,10 +34,12 @@ namespace School.infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DID"));
 
                     b.Property<string>("DNameAr")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("DNameEn")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -126,6 +131,7 @@ namespace School.infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudID"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -133,14 +139,17 @@ namespace School.infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NameAr")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("NameEn")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -159,9 +168,6 @@ namespace School.infrastructure.Migrations
                     b.Property<int>("StudID")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("Grad")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("SubID", "StudID");
 
                     b.HasIndex("StudID");
@@ -177,14 +183,16 @@ namespace School.infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubID"));
 
-                    b.Property<DateTime?>("Period")
+                    b.Property<DateTime>("Period")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SubjectNameAr")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("SubjectNameEn")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -301,7 +309,8 @@ namespace School.infrastructure.Migrations
                 {
                     b.Navigation("Ins_Subjects");
 
-                    b.Navigation("deptManger");
+                    b.Navigation("deptManger")
+                        .IsRequired();
 
                     b.Navigation("instructors");
                 });

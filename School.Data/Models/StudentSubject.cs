@@ -5,16 +5,20 @@ namespace School.Data.Models
 {
     public class StudentSubject
     {
-        [Key]
-        public int StudSubID { get; set; }
-        public int StudID { get; set; }
-        public int SubID { get; set; }
 
+
+        [Key]
+        public int StudID { get; set; }
+        [Key]
+        public int SubID { get; set; }
+        public decimal? Grad { get; set; }
         [ForeignKey("StudID")]
-        public virtual Student Student { get; set; }
+        [InverseProperty("StudentSubjects")]
+        public virtual Student? student { get; set; }
 
         [ForeignKey("SubID")]
-        public virtual Subjects Subject { get; set; }
+        [InverseProperty("StudentsSubjects")]
+        public virtual Subjects? Subject { get; set; }
 
     }
 }

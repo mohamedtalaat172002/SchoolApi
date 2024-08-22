@@ -57,7 +57,7 @@ namespace School.Service.Implementaion
 
         public async Task<string> UpdateStudent(Student student)
         {
-            var std = _studentInfrastructure.UpdateAsync(student);
+            await _studentInfrastructure.UpdateAsync(student);
             return "Updated succefully ";
         }
 

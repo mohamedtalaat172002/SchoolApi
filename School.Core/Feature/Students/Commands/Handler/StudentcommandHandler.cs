@@ -36,10 +36,10 @@ namespace School.Core.Feature.Students.Commands.Handler
         public async Task<Response<string>> Handle(EditeStudentCommand request, CancellationToken cancellationToken)
         {
             //check the existence
-            var std = _studentService.GetStudentByIdWithOutDept(request.StudID);
-            if (std == null) return NotFound<String>($"No student with id:{request.StudID}");
+            var std = await _studentService.GetStudentByIdWithOutDept(request.StudID);
+            if (std == null) return NotFound<String>(/*$"No student with id:{request.StudID}"*/);
             //maping
-            var StdMapped = _mapper.Map<Student>(request);
+            var StdMapped = _mapper.Map(request, std);
             //call servcice
             var res = await _studentService.UpdateStudent(StdMapped);
             //return response
