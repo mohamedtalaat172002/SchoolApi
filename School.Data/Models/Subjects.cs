@@ -19,7 +19,7 @@ namespace School.Data.Models
         public string? SubjectNameEn { get; set; }
         [StringLength(500)]
         public string? SubjectNameAr { get; set; }
-        public DateTime? Period { get; set; }
+        public int? HoursNum { get; set; }
 
         [InverseProperty("Subject")]
         public virtual ICollection<StudentSubject> StudentsSubjects { get; set; }

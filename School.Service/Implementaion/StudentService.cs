@@ -38,14 +38,11 @@ namespace School.Service.Implementaion
                 return "Delete process Failed ";
             }
         }
-
-
         public async Task<IQueryable<Student>> GetAllStudents()
         {
             return _studentInfrastructure.GetTableNoTracking()
                 .Include(s => s.Department);
         }
-
         public async Task<Student> GetStudentByIdIncludeDept(int id)
         {
             return await _studentInfrastructure.GetTableNoTracking()
@@ -54,13 +51,11 @@ namespace School.Service.Implementaion
                 .FirstOrDefaultAsync();
 
         }
-
         public async Task<string> UpdateStudent(Student student)
         {
             await _studentInfrastructure.UpdateAsync(student);
             return "Updated succefully ";
         }
-
         public async Task<bool> IsNameEnExist(string nameEn)
         {
             var student = _studentInfrastructure.GetTableNoTracking().Where(x => x.NameEn.Equals(nameEn)).FirstOrDefault();
@@ -73,9 +68,6 @@ namespace School.Service.Implementaion
             if (student == null) return false;
             return true;
         }
-
-
-
         public async Task<bool> IsNameEnExistExcludeSelf(string nameEn, int id)
         {
 
@@ -83,7 +75,6 @@ namespace School.Service.Implementaion
             if (student == null) return false;
             return true;
         }
-
         public async Task<bool> IsNameArExistExcludeSelf(string nameAr, int id)
         {
 
@@ -91,14 +82,10 @@ namespace School.Service.Implementaion
             if (student == null) return false;
             return true;
         }
-
-
-
         public async Task<Student> GetStudentByIdWithOutDept(int id)
         {
             return await _studentInfrastructure.GetByIdAsync(id);
         }
-
         public IQueryable<Student> GetStudentsWithFilterAndSearch(StudentOrderEnum stdsOrderEnum, string Search)
         {
             var Stds = _studentInfrastructure.GetTableNoTracking().Include(s => s.Department).AsQueryable();
@@ -126,6 +113,11 @@ namespace School.Service.Implementaion
             }
 
             return Stds;
+        }
+
+        public IQueryable<Student> GetStudentsByDeptId(int Deptid)
+        {
+            return _studentInfrastructure.GetTableNoTracking().Where(d => d.DID.Equals(Deptid)).AsQueryable();
         }
     }
 }

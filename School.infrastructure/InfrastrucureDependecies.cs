@@ -10,6 +10,7 @@ namespace School.infrastructure
         {
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             services.AddTransient<IStudentInfrastructure, StudentInfrastructure>();
+            services.AddTransient<IDepartmentInfrastructure, DepartmentInfrastructure>();
             return services;
         }
     }

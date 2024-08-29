@@ -15,7 +15,8 @@ namespace School.Service.Abstract
         public Task<bool> IsNameArExist(string nameAr);
         public Task<bool> IsNameArExistExcludeSelf(string nameAr, int id);
         public Task<bool> IsNameEnExistExcludeSelf(string nameEn, int id);
-
         public IQueryable<Student> GetStudentsWithFilterAndSearch(StudentOrderEnum studentOrderEnum, String Search);
+        public IQueryable<Student> GetStudentsByDeptId(int Deptid);
+
     }
 }

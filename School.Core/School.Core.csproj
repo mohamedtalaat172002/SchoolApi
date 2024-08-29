@@ -46,4 +46,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Feature\Dpartments\Command\Handler\" />
+    <Folder Include="Feature\Dpartments\Command\Model\" />
+    <Folder Include="Feature\Dpartments\Command\Validation\" />
+  </ItemGroup>
+
 </Project>

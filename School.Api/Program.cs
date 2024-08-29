@@ -8,6 +8,7 @@ using School.infrastructure;
 using School.infrastructure.Context;
 using School.Service;
 using System.Globalization;
+using System.Text.Json.Serialization;
 namespace School.Api
 {
     public class Program
@@ -18,7 +19,8 @@ namespace School.Api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(x =>
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve); ;
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

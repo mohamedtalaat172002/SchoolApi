@@ -12,8 +12,8 @@ using School.infrastructure.Context;
 namespace School.infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240822180646_AddInstructorAndDataAnnotationUsing")]
-    partial class AddInstructorAndDataAnnotationUsing
+    [Migration("20240826153718_EveryThingInDb")]
+    partial class EveryThingInDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,22 +34,21 @@ namespace School.infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DID"));
 
                     b.Property<string>("DNameAr")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("DNameEn")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("InsManagerId")
+                    b.Property<int?>("InsManagerId")
                         .HasColumnType("int");
 
                     b.HasKey("DID");
 
                     b.HasIndex("InsManagerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[InsManagerId] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -83,10 +82,10 @@ namespace School.infrastructure.Migrations
                     b.Property<int>("DID")
                         .HasColumnType("int");
 
-                    b.Property<string>("ENameAr")
+                    b.Property<string>("InsNameAr")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ENameEn")
+                    b.Property<string>("InsNameEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
@@ -131,7 +130,6 @@ namespace School.infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudID"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -139,17 +137,14 @@ namespace School.infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NameAr")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("NameEn")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -168,6 +163,9 @@ namespace School.infrastructure.Migrations
                     b.Property<int>("StudID")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("Grad")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("SubID", "StudID");
 
                     b.HasIndex("StudID");
@@ -183,16 +181,14 @@ namespace School.infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubID"));
 
-                    b.Property<DateTime>("Period")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("HoursNum")
+                        .HasColumnType("int");
 
                     b.Property<string>("SubjectNameAr")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("SubjectNameEn")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -206,8 +202,7 @@ namespace School.infrastructure.Migrations
                     b.HasOne("School.Data.Models.Instructor", "InstructorMgr")
                         .WithOne("deptManger")
                         .HasForeignKey("School.Data.Models.Department", "InsManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("InstructorMgr");
                 });
@@ -309,8 +304,7 @@ namespace School.infrastructure.Migrations
                 {
                     b.Navigation("Ins_Subjects");
 
-                    b.Navigation("deptManger")
-                        .IsRequired();
+                    b.Navigation("deptManger");
 
                     b.Navigation("instructors");
                 });

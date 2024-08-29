@@ -19,7 +19,7 @@ namespace School.Data.Models
         public string? DNameEn { get; set; }
         [StringLength(200)]
         public string? DNameAr { get; set; }
-        public int InsManagerId { get; set; }
+        public int? InsManagerId { get; set; }
 
 
         [InverseProperty(nameof(Student.Department))]

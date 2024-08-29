@@ -38,13 +38,14 @@ namespace School.infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("InsManagerId")
+                    b.Property<int?>("InsManagerId")
                         .HasColumnType("int");
 
                     b.HasKey("DID");
 
                     b.HasIndex("InsManagerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[InsManagerId] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -78,10 +79,10 @@ namespace School.infrastructure.Migrations
                     b.Property<int>("DID")
                         .HasColumnType("int");
 
-                    b.Property<string>("ENameAr")
+                    b.Property<string>("InsNameAr")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ENameEn")
+                    b.Property<string>("InsNameEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
@@ -177,8 +178,8 @@ namespace School.infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubID"));
 
-                    b.Property<DateTime?>("Period")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("HoursNum")
+                        .HasColumnType("int");
 
                     b.Property<string>("SubjectNameAr")
                         .HasMaxLength(500)
@@ -198,8 +199,7 @@ namespace School.infrastructure.Migrations
                     b.HasOne("School.Data.Models.Instructor", "InstructorMgr")
                         .WithOne("deptManger")
                         .HasForeignKey("School.Data.Models.Department", "InsManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("InstructorMgr");
                 });

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using School.Data.Common;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Data.Models
 {
-    public class Instructor
+    public class Instructor : LocalizeEntity
     {
         public Instructor()
         {
@@ -12,8 +13,8 @@ namespace School.Data.Models
         }
         [Key]
         public int InsId { get; set; }
-        public string? ENameAr { get; set; }
-        public string? ENameEn { get; set; }
+        public string? InsNameAr { get; set; }
+        public string? InsNameEn { get; set; }
         public string? Address { get; set; }
         public string? Position { get; set; }
         public int? SupervisorId { get; set; }
