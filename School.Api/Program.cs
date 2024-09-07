@@ -31,7 +31,8 @@ namespace School.Api
 
             builder.Services.AddCoreDependencies()
                             .AddInfrastrucureDependencies()
-                            .AddServiceDependencies();
+                            .AddServiceDependencies()
+                            .AddIdentityRegisteration();
 
             builder.Services.AddControllersWithViews();
             //Localization Configuration

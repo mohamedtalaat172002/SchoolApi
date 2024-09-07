@@ -20,7 +20,7 @@ namespace School.Service.Implementaion
                  .Include(d => d.InstructorMgr)
                  .Include(d => d.DepartmentSubjects).ThenInclude(S => S.Subjects)
                  .Include(d => d.Instructors)
-                 // .Include(d => d.Students)
+
                  .FirstOrDefaultAsync();
 
             return dept;

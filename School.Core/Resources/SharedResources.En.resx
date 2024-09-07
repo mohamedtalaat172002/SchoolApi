@@ -142,7 +142,7 @@
     <value>Element Is not Found in Database</value>
   </data>
   <data name="NotNull" xml:space="preserve">
-    <value>The dield can't be null</value>
+    <value>The Field can't be null</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Retrieved Successfully</value>
