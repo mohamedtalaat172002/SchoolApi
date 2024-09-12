@@ -123,17 +123,29 @@
   <data name="Created" xml:space="preserve">
     <value>تم اضافة العنصر بنجاح</value>
   </data>
+  <data name="CreationFailed" xml:space="preserve">
+    <value>خطأ في عمليه الاضافه راجع كلمه السر </value>
+  </data>
   <data name="Deleted" xml:space="preserve">
     <value>تم حذف العنصر بنجاح</value>
   </data>
   <data name="DepartmentNums" xml:space="preserve">
     <value>اختر رقم 1 لقسم علوم حاسب   2 لقسم تكنولوجيا المعلومات   3 لقسم نظم المعلومات</value>
   </data>
+  <data name="EmailAlreadyExist" xml:space="preserve">
+    <value>البريد الالكتروني موجود  بالفعل قم باختيار بريد مختلف</value>
+  </data>
   <data name="MaxLength100" xml:space="preserve">
     <value>عدد حروف العنصر لا يجب ان تتجاوز 100 حرف</value>
   </data>
+  <data name="MaxLength250" xml:space="preserve">
+    <value>عدد حروف العنصر لا يجب ان تتجاوز 100 حرف</value>
+  </data>
+  <data name="MaxLength50" xml:space="preserve">
+    <value>عدد حروف العنصر لا يجب ان تتجاوز 100 حرف</value>
+  </data>
   <data name="MaxLengthPhone" xml:space="preserve">
-    <value>عدد ارقام التلفون لا يجب ان يتجاوز 11 رقم</value>
+    <value>عدد ارقام التلفون يجب ان تكون 11 رقم</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكن ترك العنصر فارغ</value>
@@ -143,6 +155,12 @@
   </data>
   <data name="NotNull" xml:space="preserve">
     <value>يجب ادخال قيمه للعنصر</value>
+  </data>
+  <data name="PasswordsMustMatch" xml:space="preserve">
+    <value>يجب ان تتساوي كلمه السر مع تأكيد كلمه السر </value>
+  </data>
+  <data name="RegisterSucess" xml:space="preserve">
+    <value>تمت عمليه تسجيل بينات المستخدم بنجاح </value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>تم استعادة البيانات</value>
@@ -155,5 +173,8 @@
   </data>
   <data name="Updated" xml:space="preserve">
     <value>تم تحديث العنصر بنجاح</value>
+  </data>
+  <data name="UserNameAlreadyExist" xml:space="preserve">
+    <value> اسم المستخدم موجود بالفعل اختر اسم مستخدم مختلف  </value>
   </data>
 </root>

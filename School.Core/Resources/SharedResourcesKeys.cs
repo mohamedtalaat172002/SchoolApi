@@ -16,8 +16,14 @@
         public const string DepartmentNums = "DepartmentNums";
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";
+        public const string EmailAlreadyExist = "EmailAlreadyExist";
+        public const string UserNameAlreadyExist = "UserNameAlreadyExist";
+        public const string RegisterSucess = "RegisterSucess";
+        public const string MaxLength250 = "MaxLength250";
+        public const string MaxLength50 = "MaxLength50";
+        public const string PasswordsMustMatch = "PasswordsMustMatch";
 
-
+        public const string CreationFailed = " CreationFailed";
 
 
     }

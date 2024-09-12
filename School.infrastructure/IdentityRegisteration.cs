@@ -16,7 +16,7 @@ namespace School.infrastructure
                 option.Password.RequireLowercase =
                 option.Password.RequireNonAlphanumeric =
                 option.Password.RequireUppercase = true;
-                option.Password.RequiredLength = 6;
+                option.Password.RequiredLength = 8;
                 option.Password.RequiredUniqueChars = 1;
 
                 // Lockout settings.

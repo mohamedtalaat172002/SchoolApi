@@ -50,6 +50,7 @@
     <Folder Include="Feature\Dpartments\Command\Handler\" />
     <Folder Include="Feature\Dpartments\Command\Model\" />
     <Folder Include="Feature\Dpartments\Command\Validation\" />
+    <Folder Include="Feature\Users\Queries\" />
   </ItemGroup>
 
 </Project>

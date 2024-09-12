@@ -123,14 +123,26 @@
   <data name="Created" xml:space="preserve">
     <value>Element Added Successfully</value>
   </data>
+  <data name="CreationFailed" xml:space="preserve">
+    <value>operation failed ,change the password </value>
+  </data>
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
   <data name="DepartmentNums" xml:space="preserve">
     <value>1 for cs   2 For IT   3 for Is</value>
   </data>
+  <data name="EmailAlreadyExist" xml:space="preserve">
+    <value>The Email you Enterd already exist</value>
+  </data>
   <data name="MaxLength100" xml:space="preserve">
     <value>Number of Char can't be more than 100 char</value>
+  </data>
+  <data name="MaxLength250" xml:space="preserve">
+    <value>Can't be more than 250 character</value>
+  </data>
+  <data name="MaxLength50" xml:space="preserve">
+    <value>Can't be more than 50 character</value>
   </data>
   <data name="MaxLengthPhone" xml:space="preserve">
     <value>Phone Number can't be more than 11 digit</value>
@@ -144,6 +156,12 @@
   <data name="NotNull" xml:space="preserve">
     <value>The Field can't be null</value>
   </data>
+  <data name="PasswordsMustMatch" xml:space="preserve">
+    <value>password field must be exactly the same as Confirm password field</value>
+  </data>
+  <data name="RegisterSucess" xml:space="preserve">
+    <value>Register Completed Successfully</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Retrieved Successfully</value>
   </data>
@@ -155,5 +173,8 @@
   </data>
   <data name="Updated" xml:space="preserve">
     <value>Updated Successfully</value>
+  </data>
+  <data name="UserNameAlreadyExist" xml:space="preserve">
+    <value>The User Name you Enterd already exist</value>
   </data>
 </root>
