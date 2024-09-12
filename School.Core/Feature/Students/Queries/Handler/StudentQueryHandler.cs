@@ -60,6 +60,7 @@ namespace School.Core.Feature.Students.Queries.Handler
 
         public async Task<PaginatedResult<GetStudentsPaginatedResponse>> Handle(GetStudentsPaginatedQuery request, CancellationToken cancellationToken)
         {
+            //Expression<Func<parameter, what to return>> exp = e =>
             Expression<Func<Student, GetStudentsPaginatedResponse>> exp = e =>
             new(e.StudID, e.NameEn, e.Address, e.Department.DNameEn);
 
