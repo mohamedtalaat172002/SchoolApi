@@ -123,9 +123,6 @@
   <data name="Created" xml:space="preserve">
     <value>تم اضافة العنصر بنجاح</value>
   </data>
-  <data name="CreationFailed" xml:space="preserve">
-    <value>خطأ في عمليه الاضافه راجع كلمه السر </value>
-  </data>
   <data name="Deleted" xml:space="preserve">
     <value>تم حذف العنصر بنجاح</value>
   </data>
@@ -155,6 +152,9 @@
   </data>
   <data name="NotNull" xml:space="preserve">
     <value>يجب ادخال قيمه للعنصر</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>حدث خطأ اثناء تنفيذ العمليه,راجع كلمه السر</value>
   </data>
   <data name="PasswordsMustMatch" xml:space="preserve">
     <value>يجب ان تتساوي كلمه السر مع تأكيد كلمه السر </value>

@@ -123,9 +123,6 @@
   <data name="Created" xml:space="preserve">
     <value>Element Added Successfully</value>
   </data>
-  <data name="CreationFailed" xml:space="preserve">
-    <value>operation failed ,change the password </value>
-  </data>
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
@@ -155,6 +152,9 @@
   </data>
   <data name="NotNull" xml:space="preserve">
     <value>The Field can't be null</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>operation failed ,change the password </value>
   </data>
   <data name="PasswordsMustMatch" xml:space="preserve">
     <value>password field must be exactly the same as Confirm password field</value>

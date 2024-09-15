@@ -23,7 +23,7 @@
         public const string MaxLength50 = "MaxLength50";
         public const string PasswordsMustMatch = "PasswordsMustMatch";
 
-        public const string CreationFailed = " CreationFailed";
+        public const string OperationFailed = "OperationFailed";
 
 
     }

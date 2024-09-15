@@ -6,6 +6,7 @@ namespace School.Core.Mapping.UserMap
     {
         public UserProfile()
         {
+            EditeUserMap();
             AddUserMap();
             PagintedUsersMap();
             SingleUserMap();

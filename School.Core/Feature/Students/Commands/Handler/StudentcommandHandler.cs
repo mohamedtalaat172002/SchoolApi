@@ -50,7 +50,7 @@ namespace School.Core.Feature.Students.Commands.Handler
         {
             var Std = await _studentService.GetStudentByIdWithOutDept(request.id);
             if (Std == null)
-                return NotFound<String>($"No student with id:{request.id}");
+                return NotFound<String>();
             await _studentService.DeleteStudent(Std);
             return Deleted<String>();
 

@@ -30,5 +30,20 @@ namespace School.Api.Controllers
             return NewResult(res);
         }
 
+
+        [HttpPut(Router.ApplicationUserRouting.Edit)]
+        public async Task<IActionResult> EditeUser([FromBody] EditeUserCommand userCommand)
+        {
+            var response = await _mediator.Send(userCommand);
+            return NewResult(response);
+        }
+
+        [HttpDelete(Router.ApplicationUserRouting.Delete)]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            var response = await _mediator.Send(new DeleteUserCommand(id));
+            return NewResult(response);
+        }
+
     }
 }
