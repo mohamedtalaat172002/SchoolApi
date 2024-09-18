@@ -2,6 +2,7 @@
 using School.Api.Base;
 using School.Core.Feature.Users.Command.Model;
 using School.Core.Feature.Users.Queries.Model;
+using Router = School.Api.Base.Router;
 
 namespace School.Api.Controllers
 {
@@ -38,12 +39,22 @@ namespace School.Api.Controllers
             return NewResult(response);
         }
 
+        [HttpPut(Router.ApplicationUserRouting.ChangePassword)]
+        public async Task<IActionResult> ChangeUserPassWord([FromBody] ChangeUserPasswordCommand userCommand)
+        {
+            var response = await _mediator.Send(userCommand);
+            return NewResult(response);
+        }
+
         [HttpDelete(Router.ApplicationUserRouting.Delete)]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             var response = await _mediator.Send(new DeleteUserCommand(id));
             return NewResult(response);
         }
+
+
+
 
     }
 }

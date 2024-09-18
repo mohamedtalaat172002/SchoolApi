@@ -13,8 +13,8 @@ namespace School.Core.Feature.Users.Command.Handler
     public class UserCommandHandler : ResponseHandler,
         IRequestHandler<EditeUserCommand, Response<String>>,
         IRequestHandler<AddUserCommand, Response<String>>,
-        IRequestHandler<DeleteUserCommand, Response<String>>
-
+        IRequestHandler<DeleteUserCommand, Response<String>>,
+        IRequestHandler<ChangeUserPasswordCommand, Response<String>>
     {
 
         private readonly IMapper _mapper;
@@ -85,6 +85,15 @@ namespace School.Core.Feature.Users.Command.Handler
                 return BadRequest<String>(_sharedResources[SharedResourcesKeys.OperationFailed]);
             return Updated<String>();
 
+        }
+
+        public async Task<Response<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var User = _userManager.Users.FirstOrDefault(u => u.Id == request.Id);
+            if (User == null) return NotFound<String>();
+            var PasswordChange = await _userManager.ChangePasswordAsync(User, request.CurrentPassword, request.NewPassword);
+            if (!PasswordChange.Succeeded) return BadRequest<String>(_sharedResources[SharedResourcesKeys.OperationFailed]);
+            return Updated<String>();
         }
     }
 }
