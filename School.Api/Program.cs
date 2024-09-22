@@ -32,7 +32,7 @@ namespace School.Api
             builder.Services.AddCoreDependencies()
                             .AddInfrastrucureDependencies()
                             .AddServiceDependencies()
-                            .AddIdentityRegisteration();
+                            .AddIdentityRegisteration(builder.Configuration);
 
             builder.Services.AddControllersWithViews();
             //Localization Configuration
@@ -71,6 +71,7 @@ namespace School.Api
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

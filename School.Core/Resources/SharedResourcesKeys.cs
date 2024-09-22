@@ -22,9 +22,8 @@
         public const string MaxLength250 = "MaxLength250";
         public const string MaxLength50 = "MaxLength50";
         public const string PasswordsMustMatch = "PasswordsMustMatch";
-
         public const string OperationFailed = "OperationFailed";
-
+        public const string SignInFailed = "SignInFailed";
 
     }
 }

@@ -162,6 +162,9 @@
   <data name="RegisterSucess" xml:space="preserve">
     <value>Register Completed Successfully</value>
   </data>
+  <data name="SignInFailed" xml:space="preserve">
+    <value>Wrong User Name Or Password </value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Retrieved Successfully</value>
   </data>

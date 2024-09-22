@@ -47,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Feature\Authentication\Query\" />
     <Folder Include="Feature\Dpartments\Command\Handler\" />
     <Folder Include="Feature\Dpartments\Command\Model\" />
     <Folder Include="Feature\Dpartments\Command\Validation\" />

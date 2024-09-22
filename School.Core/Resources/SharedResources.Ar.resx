@@ -162,6 +162,9 @@
   <data name="RegisterSucess" xml:space="preserve">
     <value>تمت عمليه تسجيل بينات المستخدم بنجاح </value>
   </data>
+  <data name="SignInFailed" xml:space="preserve">
+    <value>خطأ في اسم المتسخدم أو كلمه المرور</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>تم استعادة البيانات</value>
   </data>
