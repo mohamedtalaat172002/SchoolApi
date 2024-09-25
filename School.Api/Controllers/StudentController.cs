@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using School.Api.Base;
 using School.Core.Feature.Students.Commands.Model;
 using School.Core.Feature.Students.Queries.Model;
@@ -9,13 +10,14 @@ namespace School.Api.Controllers
 
     public class StudentController : AppControllerBase
     {
+        [Authorize]
         [HttpGet(Router.StudentRouting.List)]
         public async Task<IActionResult> GetALL()
         {
             var res = await _mediator.Send(new GetAllStudentQuery());
             return NewResult(res);
         }
-
+        [Authorize]
         [HttpGet(Router.StudentRouting.GetByID)]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
